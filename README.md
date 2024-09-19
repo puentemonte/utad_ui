@@ -15,6 +15,16 @@
 - Animate crosshair when shooting
 - If Player is aiming @ Enemy it has to change color
 
+To animate the crosshair when shooting, we need to override the Tick function of the UserWidget. Overriding normal Tick and Construct will not work in cpp, Native prefix is needed. We need an animation duration, and a "normal" and "desired" crosshair size. 
+
+```cpp
+void UMyWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+{
+    Super::NativeTick(MyGeometry, InDeltaTime);
+    // Your Stuff Goes Here
+}
+```
+
 ### Damage sign
 
 - When Player is damaged by Enemy, Health decreases
