@@ -76,7 +76,7 @@ Check if there's an Enemy in front.
 - When Player is damaged by Enemy, Health decreases
 - Implement new PlayerHitMarker showing damage received
 
-* Screens
+## Screens
 
 ### Splash screen
 
