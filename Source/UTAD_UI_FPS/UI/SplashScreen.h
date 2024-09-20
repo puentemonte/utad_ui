@@ -18,11 +18,15 @@ class UTAD_UI_FPS_API USplashScreen : public UUserWidget
 private:
 	float fSplashScreenProgress = 0.f;
 
+	class AUTAD_UI_FPSCharacter* PlayerCharacter;
+
 public:
 	UPROPERTY(EditAnywhere, Category = UI)
-	float fSplashScreenDuration = 1.f;
+	float fSplashScreenDuration = 3.f;
 
 
 protected:
+	virtual void NativeConstruct() override;
+
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 };
