@@ -13,6 +13,7 @@
 #include "Blueprint/UserWidget.h"
 #include "UI/PlayerHUD.h"
 #include "UI/Crosshair.h"
+#include "UI/SplashScreen.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AUTAD_UI_FPSCharacter
@@ -67,6 +68,17 @@ void AUTAD_UI_FPSCharacter::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("Player HUD Widget not assigned to UTAD_UI_FPSCharacter"));
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Player HUD Widget not assigned to UTAD_UI_FPSCharacter"));
+	}
+
+	if (SplashScreenWidget)
+	{
+		SplashScreenInstance = CreateWidget<USplashScreen>(GetWorld(), SplashScreenWidget);
+		SplashScreenInstance->AddToViewport();
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Splash Screen Widget not assigned to UTAD_UI_FPSCharacter"));
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Splash Screen Widget not assigned to UTAD_UI_FPSCharacter"));
 	}
 }
 

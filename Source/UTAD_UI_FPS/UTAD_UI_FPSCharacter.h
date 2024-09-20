@@ -16,6 +16,7 @@ class UTP_WeaponComponent;
 struct FInputActionValue;
 
 class UPlayerHUD;
+class USplashScreen;
 
 DECLARE_DELEGATE_TwoParams(FOnHealthChanged, int /* New Health*/, int /* Max Health*/)
 
@@ -125,6 +126,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UI)
 	TSubclassOf<UPlayerHUD> PlayerHUDWidget;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UI)
+	TSubclassOf<USplashScreen> SplashScreenWidget;
+
 	FOnHealthChanged OnHealthChanged;
 
 protected:
@@ -156,5 +160,7 @@ private:
 
 	/** Instances that will be created and showed on viewport */
 	UPlayerHUD* PlayerHUDInstance;
+
+	USplashScreen* SplashScreenInstance;
 };
 

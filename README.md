@@ -86,6 +86,8 @@ Check if there's an Enemy in front.
 
 - When Game is started, show Splash Screen, after a few seconds, disappears
 
+Create a new Widget class SplashScreenWidget. Add it to the PlayerCharacter. The new Widget basically disables the player input for an amount of time and disappears when that time has passed.
+
 ### Ability tree
 
 - Menu accesible from Game
