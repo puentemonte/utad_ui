@@ -151,6 +151,7 @@ void AUTAD_UI_FPSCharacter::SetHealth(int NewHealth)
 	if (ClampedNewHealth != Health)
 	{
 		Health = ClampedNewHealth;
+		OnHealthChanged.ExecuteIfBound(Health, MaxHealth);
 	}
 }
 

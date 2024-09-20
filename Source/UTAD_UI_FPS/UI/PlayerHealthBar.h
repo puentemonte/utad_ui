@@ -16,6 +16,9 @@ class UTAD_UI_FPS_API UPlayerHealthBar : public UUserWidget
 	
 public:
 
+	UPROPERTY(EditAnywhere, meta = (BindWidget))
+	class UProgressBar* PlayerHealthBar;
+
 	UFUNCTION(BlueprintCallable, Category = Visibility)
 	void Show();
 
@@ -23,6 +26,8 @@ public:
 	void Hide();
 
 protected:
+
+	virtual void NativeConstruct() override;
 
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
@@ -34,5 +39,5 @@ private:
 
 	void UpdatePlayerHealthBar(int NewHealth, int MaxHealth);
 
-	void LowHealthBlink();
+	void LowHealthBlink(float InDeltaTime);
 };

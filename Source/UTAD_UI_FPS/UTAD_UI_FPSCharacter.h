@@ -17,6 +17,8 @@ struct FInputActionValue;
 
 class UPlayerHUD;
 
+DECLARE_DELEGATE_TwoParams(FOnHealthChanged, int /* New Health*/, int /* Max Health*/)
+
 UCLASS(config=Game)
 class AUTAD_UI_FPSCharacter : public ACharacter
 {
@@ -122,6 +124,8 @@ public:
 	/** Widget Blueprints that will be used to create the instances */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UI)
 	TSubclassOf<UPlayerHUD> PlayerHUDWidget;
+
+	FOnHealthChanged OnHealthChanged;
 
 protected:
 	/** Called for movement input */

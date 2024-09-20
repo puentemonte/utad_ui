@@ -9,6 +9,10 @@
 - If Player receives damage, Progress bar has to decrease
 - If Health param is @ 25% of MaxHealth, the Progress bar has to oscillate between original color and red indifinitely
 
+In the Player, create a delegate to bind the health change action. This way, whenever the health variable of the Player changes, the ProgressBar is updated accordingly.
+
+To manage the blinking, in the NativeConstruct of the HealthBarWidget, check if the health is low. If it is then we need to update the blinking timer as well as the color of the bar. 
+
 ### Dynamic crosshair
 
 - Already existing crosshair

@@ -10,14 +10,17 @@
 void UPlayerHUD::ShowNoWeapon()
 {
 	CrosshairWidget->Hide();
+	PlayerHealthBarWidget->Show();
 }
 
 void UPlayerHUD::ShowAll()
 {
 	CrosshairWidget->Show();
+	PlayerHealthBarWidget->Show();
 }
 
 void UPlayerHUD::Hide()
 {
 	CrosshairWidget->Hide();
+	PlayerHealthBarWidget->Hide();
 }
