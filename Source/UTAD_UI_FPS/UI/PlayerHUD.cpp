@@ -9,15 +9,15 @@
 
 void UPlayerHUD::ShowNoWeapon()
 {
-
+	CrosshairWidget->Hide();
 }
 
 void UPlayerHUD::ShowAll()
 {
-
+	CrosshairWidget->Show();
 }
 
 void UPlayerHUD::Hide()
 {
-
+	CrosshairWidget->Hide();
 }

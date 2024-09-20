@@ -15,17 +15,23 @@ class UTAD_UI_FPS_API UCrosshair : public UUserWidget
 	GENERATED_BODY()
 
 private:
-	float fShootingAnimTime = 0.f;
+	float fShootingAnimProgress = 0.f;
 
-	FVector2D vDesiredSize = FVector2D(200.f, 200.f);
+	bool bShooting = true;
 	
 public:
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI | Crosshair")
-	float fShootingAnimDuration = 1.f;
+	UPROPERTY(EditAnywhere, Category = "UI | Crosshair")
+	FVector2D vNormalSize = FVector2D(100.f, 100.f);
 
+	UPROPERTY(EditAnywhere, Category = "UI | Crosshair")
+	FVector2D vDesiredSize = FVector2D(150.f, 150.f);
+
+	UPROPERTY(EditAnywhere, Category = "UI | Crosshair")
+	float fShootingAnimDuration = 0.5f;
+	
 	UPROPERTY(EditAnywhere, meta = (BindWidget))
-	class UImage* CrosshairImage;
+	class UImage* Crosshair;
 
 	void ShootingAnim();
 

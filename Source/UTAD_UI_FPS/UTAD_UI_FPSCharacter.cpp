@@ -7,10 +7,12 @@
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "UTAD_UI_FPS_Enemy.h"
 
 // UI
 #include "Blueprint/UserWidget.h"
 #include "UI/PlayerHUD.h"
+#include "UI/Crosshair.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AUTAD_UI_FPSCharacter
@@ -65,6 +67,35 @@ void AUTAD_UI_FPSCharacter::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("Player HUD Widget not assigned to UTAD_UI_FPSCharacter"));
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Player HUD Widget not assigned to UTAD_UI_FPSCharacter"));
+	}
+}
+
+void AUTAD_UI_FPSCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (bHasRifle)
+	{
+		FVector Start = FirstPersonCameraComponent->GetComponentLocation();
+		FVector End = Start + FirstPersonCameraComponent->GetForwardVector() * 10000.f;
+
+		FHitResult HitResult;
+
+		if (GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_Visibility))
+		{
+			if(AUTAD_UI_FPS_Enemy* Enemy = Cast<AUTAD_UI_FPS_Enemy>(HitResult.GetActor()))
+			{
+				PlayerHUDInstance->CrosshairWidget->SetColor(true);
+			}
+			else
+			{
+				PlayerHUDInstance->CrosshairWidget->SetColor(false);
+			}
+		}
+		else
+		{
+			PlayerHUDInstance->CrosshairWidget->SetColor(false);
+		}
 	}
 }
 

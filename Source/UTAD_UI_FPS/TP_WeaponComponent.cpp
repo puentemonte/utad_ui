@@ -11,6 +11,8 @@
 #include "EnhancedInputSubsystems.h"
 
 #include "Blueprint/UserWidget.h"
+#include "UI/PlayerHUD.h"
+#include "UI/Crosshair.h"
 
 #define RELOAD_TIME 1.f
 
@@ -45,6 +47,7 @@ void UTP_WeaponComponent::Fire()
 		return;
 	}
 
+	Character->GetPlayerHUDInstance()->CrosshairWidget->ShootingAnim();
 	// Try and fire a projectile
 	if (ProjectileClass != nullptr)
 	{
@@ -62,6 +65,7 @@ void UTP_WeaponComponent::Fire()
 	
 			// Spawn the projectile at the muzzle
 			World->SpawnActor<AUTAD_UI_FPSProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
+		
 		}
 	}
 	

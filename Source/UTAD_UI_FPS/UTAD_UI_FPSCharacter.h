@@ -53,6 +53,8 @@ public:
 protected:
 	virtual void BeginPlay();
 
+	virtual void Tick(float DeltaTime) override;
+
 public:
 		
 	/** Look Input Action */
@@ -141,6 +143,7 @@ public:
 	/** Returns AttachedWeaponComponent subobject **/
 	UTP_WeaponComponent* GetAttachedWeaponComponent() const { return AttachedWeaponComponent; }
 
+	UPlayerHUD* GetPlayerHUDInstance() const { return PlayerHUDInstance; };
 private:
 
 	/****************************************************/

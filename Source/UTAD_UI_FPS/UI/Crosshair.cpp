@@ -17,21 +17,19 @@ void UCrosshair::Hide()
 
 void UCrosshair::ShootingAnim()
 {
-	// Need to reset the time
-	fShootingAnimTime = fShootingAnimDuration;
-
-	CrosshairImage->SetDesiredSizeOverride(vDesiredSize);
+	fShootingAnimProgress = 0.f;
+	bShooting = true;
 }
 
 void UCrosshair::SetColor(bool bAimingAtEnemy)
 {
 	if (bAimingAtEnemy)
 	{
-		CrosshairImage->SetBrushTintColor(FLinearColor::Yellow);
+		Crosshair->SetBrushTintColor(FLinearColor::Yellow);
 	}
 	else
 	{
-		CrosshairImage->SetBrushTintColor(FLinearColor::Black);
+		Crosshair->SetBrushTintColor(FLinearColor::Black);
 	}
 }
 
@@ -39,12 +37,22 @@ void UCrosshair::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 {
 		Super::NativeTick(MyGeometry, InDeltaTime);
 
-		if (fShootingAnimTime > 0.f)
+		if (fShootingAnimProgress < fShootingAnimDuration)
 		{
-			fShootingAnimTime -= InDeltaTime;
+			fShootingAnimProgress += InDeltaTime;
+
+			if (fShootingAnimProgress >= fShootingAnimDuration)
+			{
+				bShooting = false;
+			}
+		}
+
+		if (bShooting)
+		{
+			Crosshair->SetDesiredSizeOverride(vDesiredSize);
 		}
 		else
 		{
-			CrosshairImage->SetDesiredSizeOverride(FVector2D::ZeroVector); // Needed?
+			Crosshair->SetDesiredSizeOverride(vNormalSize);
 		}
 }

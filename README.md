@@ -21,9 +21,55 @@ To animate the crosshair when shooting, we need to override the Tick function of
 void UMyWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 {
     Super::NativeTick(MyGeometry, InDeltaTime);
-    // Your Stuff Goes Here
+    
+
+    // Code...
 }
 ```
+
+We need to call the ShootingAnim from the Crosshair class in the WeaponComponent when the Weapon is shot.
+
+```cpp
+
+Character->GetPlayerHUDInstance()->Crosshair->ShootingAnim();
+```
+
+To make it work, in the Crosshair Image of the WB_Crosshair, check sizeToContent.
+
+For changing the color of the Crosshair when aiming at an Enemy, we need the actual image of the crosshair. To change it, just call the SetColor method from the Tick function of the character. 
+
+```cpp
+void AUTAD_UI_FPSCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (bHasRifle)
+	{
+		FVector Start = FirstPersonCameraComponent->GetComponentLocation();
+		FVector End = Start + FirstPersonCameraComponent->GetForwardVector() * 10000.f;
+
+		FHitResult HitResult;
+
+		if (GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_Visibility))
+		{
+			if(AUTAD_UI_FPS_Enemy* Enemy = Cast<AUTAD_UI_FPS_Enemy>(HitResult.GetActor()))
+			{
+				PlayerHUDInstance->Crosshair->SetColor(true);
+			}
+			else
+			{
+				PlayerHUDInstance->Crosshair->SetColor(false);
+			}
+		}
+		else
+		{
+			PlayerHUDInstance->Crosshair->SetColor(false);
+		}
+	}
+}
+```
+
+Check if there's an Enemy in front.
 
 ### Damage sign
 
