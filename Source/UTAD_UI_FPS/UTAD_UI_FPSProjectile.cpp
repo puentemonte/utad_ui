@@ -6,6 +6,7 @@
 
 #include "UTAD_UI_FPSCharacter.h"
 #include "UTAD_UI_FPS_Enemy.h"
+#include "UI/PlayerDamageSign.h"
 
 #define DAMAGE 15
 
@@ -51,6 +52,7 @@ void AUTAD_UI_FPSProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherAc
 		if (IsValid(Character))
 		{
 			Character->SetHealth(Character->GetHealth() - DAMAGE);
+			Character->GetPlayerDamageOverlayInstance()->Show();
 			Destroy();
 			return;
 		}

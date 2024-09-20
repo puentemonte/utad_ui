@@ -80,6 +80,27 @@ Check if there's an Enemy in front.
 - When Player is damaged by Enemy, Health decreases
 - Implement new PlayerHitMarker showing damage received
 
+Just like for the Splash Screen, create a new Widget with just an image. Set the visibility by default to hidden and when a Projectile hits the Character, set the visibility to visible. In UTAD_UI_FPSProjectile.cpp file:
+
+```cpp
+void AUTAD_UI_FPSProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+
+    // Code here...
+
+    AUTAD_UI_FPSCharacter* Character = Cast<AUTAD_UI_FPSCharacter>(OtherActor);
+	if (IsValid(Character))
+	{
+		Character->SetHealth(Character->GetHealth() - DAMAGE);
+		Character->GetPlayerDamageOverlayInstance()->Show();
+		Destroy();
+		return;
+	}
+
+    // Code here...
+}
+```
+
 ## Screens
 
 ### Splash screen

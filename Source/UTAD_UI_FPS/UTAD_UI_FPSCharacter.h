@@ -17,6 +17,7 @@ struct FInputActionValue;
 
 class UPlayerHUD;
 class USplashScreen;
+class UPlayerDamageOverlay;
 
 DECLARE_DELEGATE_TwoParams(FOnHealthChanged, int /* New Health*/, int /* Max Health*/)
 
@@ -129,6 +130,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UI)
 	TSubclassOf<USplashScreen> SplashScreenWidget;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UI)
+	TSubclassOf<UPlayerDamageOverlay> PlayerDamageSignWidget;
+
 	FOnHealthChanged OnHealthChanged;
 
 protected:
@@ -152,6 +156,9 @@ public:
 	UTP_WeaponComponent* GetAttachedWeaponComponent() const { return AttachedWeaponComponent; }
 
 	UPlayerHUD* GetPlayerHUDInstance() const { return PlayerHUDInstance; };
+	
+	UPlayerDamageOverlay* GetPlayerDamageOverlayInstance() const { return PlayerDamageOverlayInstance; };
+
 private:
 
 	/****************************************************/
@@ -162,5 +169,7 @@ private:
 	UPlayerHUD* PlayerHUDInstance;
 
 	USplashScreen* SplashScreenInstance;
+
+	UPlayerDamageOverlay* PlayerDamageOverlayInstance;
 };
 

@@ -14,6 +14,7 @@
 #include "UI/PlayerHUD.h"
 #include "UI/Crosshair.h"
 #include "UI/SplashScreen.h"
+#include "UI/PlayerDamageSign.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AUTAD_UI_FPSCharacter
@@ -79,6 +80,18 @@ void AUTAD_UI_FPSCharacter::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("Splash Screen Widget not assigned to UTAD_UI_FPSCharacter"));
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Splash Screen Widget not assigned to UTAD_UI_FPSCharacter"));
+	}
+
+	if (PlayerDamageSignWidget)
+	{
+		PlayerDamageOverlayInstance = CreateWidget<UPlayerDamageOverlay>(GetWorld(), PlayerDamageSignWidget);
+		PlayerDamageOverlayInstance->AddToViewport();
+		PlayerDamageOverlayInstance->Hide();
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Player Damage Sign Widget not assigned to UTAD_UI_FPSCharacter"));
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Player Damage Sign Widget not assigned to UTAD_UI_FPSCharacter"));
 	}
 }
 
