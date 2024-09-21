@@ -123,3 +123,18 @@ Create a new Widget class SplashScreenWidget. Add it to the PlayerCharacter. The
 - Unlocking abilities requires unlocking previous ability from the same Branch
 - Select ability and confirm unlocking
 - Give Player points to unlock new abilities (either give them at the start or killing enemies gives points)
+
+#### TODO:
+
+ABility Tree
+- [x] Create art for nodes
+- [ ] Node Widget
+- [ ] Ability Tree Widget
+> - Selecting ability to unlock
+> - Confirmation button / unlocking progress bar
+> - Abilities that cannot be unlocked are tinted in red
+- [ ] Unlocking Logic
+
+Overall
+- [ ] Ammo
+- [ ] Reload Progress Bar
