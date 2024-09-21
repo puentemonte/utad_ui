@@ -1,9 +1,9 @@
 # UTAD-UI-FPS-Public
 
-- [ x ] Health Bar
-- [ x ] Crosshair
-- [ x ] Damage Overlay
-- [ x ] Splash Screen
+- [x] Health Bar
+- [x] Crosshair
+- [x] Damage Overlay
+- [x] Splash Screen
 - [ ] Ability Tree
 
 ## HUD
