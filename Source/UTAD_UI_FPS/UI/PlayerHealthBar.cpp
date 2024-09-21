@@ -45,7 +45,7 @@ void UPlayerHealthBar::UpdatePlayerHealthBar(int NewHealth, int MaxHealth)
 
 void UPlayerHealthBar::LowHealthBlink(float InDeltaTime)
 {
-	FProgressBarStyle Style = PlayerHealthBar->WidgetStyle;
+	FProgressBarStyle Style = PlayerHealthBar->GetWidgetStyle();
 	if (bIsLowHealth)
 	{
 		BlinkTimer += InDeltaTime;
