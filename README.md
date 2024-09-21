@@ -162,6 +162,8 @@ And then for the levels, we basically have an int that saves the current unlocke
 And then for updating the PointsText on the AbilityTree, we create a new delegate that executes when Points are removed from the Player. This happens in the TreeNode if it's successfully unlocked.
 
 #### TODO:
+- [ ] Finish ability tree implementation 
+
 Overall
 - [ ] Ammo
 - [ ] Reload Progress Bar
