@@ -124,17 +124,44 @@ Create a new Widget class SplashScreenWidget. Add it to the PlayerCharacter. The
 - Select ability and confirm unlocking
 - Give Player points to unlock new abilities (either give them at the start or killing enemies gives points)
 
+To start with, add a Points property to the player. That way we know if a certain ability can be unlocked.
+
+For the abilities (or TreeNodes), we need to know how many Points the Character has. Every Node know how much it costs to unlock. For the UI to know if  the Player has interacted with an ability, we need two functions:
+
+```cpp
+void MouseDown
+{
+    // Code here...
+}
+
+void MouseUp
+{
+    // Code here...
+}
+
+```
+
+We call these functions when the Button of the ability has been clicked/released. Yet, we need to find a way to update this information in the AbilityTree. We basically save the instance of the AbilityTree in a very wonky way: 
+
+```cpp
+// Parent: Canvas -> Overlay -> UAbilityTree
+AbilityTreeInstance = Cast<UAbilityTree>(GetParent()->GetOuter()->GetOuter());
+```
+
+Since we hace ability types, we have an enum to showcase each one of them.
+
+```cpp
+enum ABILITY_TYPE
+{
+    MOVEMENT, HEALTH, DAMAGE
+}
+```
+
+And then for the levels, we basically have an int that saves the current unlocked level for each ability. I mean, it'd be better to have a map but just for three abilities it's a little bit overkill.
+
+And then for updating the PointsText on the AbilityTree, we create a new delegate that executes when Points are removed from the Player. This happens in the TreeNode if it's successfully unlocked.
+
 #### TODO:
-
-ABility Tree
-- [x] Create art for nodes
-- [ ] Node Widget
-- [ ] Ability Tree Widget
-> - Selecting ability to unlock
-> - Confirmation button / unlocking progress bar
-> - Abilities that cannot be unlocked are tinted in red
-- [ ] Unlocking Logic
-
 Overall
 - [ ] Ammo
 - [ ] Reload Progress Bar

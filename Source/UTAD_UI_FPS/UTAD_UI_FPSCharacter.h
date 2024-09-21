@@ -20,6 +20,7 @@ class USplashScreen;
 class UPlayerDamageOverlay;
 
 DECLARE_DELEGATE_TwoParams(FOnHealthChanged, int /* New Health*/, int /* Max Health*/)
+DECLARE_DELEGATE_OneParam(FOnPointsChanged, int /* New Points */)
 
 UCLASS(config=Game)
 class AUTAD_UI_FPSCharacter : public ACharacter
@@ -119,9 +120,14 @@ public:
 
 	void SetAttachedWeaponComponent(UTP_WeaponComponent* WeaponComponent);
 
+	void RemovePoints(int InPoints);
+
 	/****************************************************/
 	/************************ UI ************************/
 	/****************************************************/
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = UI)
+	int Points = 5000;
 
 	/** Widget Blueprints that will be used to create the instances */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UI)
@@ -134,6 +140,7 @@ public:
 	TSubclassOf<UPlayerDamageOverlay> PlayerDamageSignWidget;
 
 	FOnHealthChanged OnHealthChanged;
+	FOnPointsChanged OnPointsChanged;
 
 protected:
 	/** Called for movement input */

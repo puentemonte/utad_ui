@@ -225,3 +225,10 @@ void AUTAD_UI_FPSCharacter::SetAttachedWeaponComponent(UTP_WeaponComponent* Weap
 {
 	AttachedWeaponComponent = WeaponComponent;
 }
+
+void AUTAD_UI_FPSCharacter::RemovePoints(int InPoints)
+{
+	Points -= InPoints;
+
+	OnPointsChanged.ExecuteIfBound(Points);
+}
