@@ -2,9 +2,6 @@
 
 
 #include "TreeNode.h"
-#include "Components/Image.h"
-#include "Components/ProgressBar.h"
-#include "Components/Button.h"
 #include "AbilityTree.h"
 #include "../UTAD_UI_FPSCharacter.h"
 #include "Kismet/GameplayStatics.h"
@@ -17,17 +14,21 @@ void UTreeNode::NativeConstruct()
         UE_LOG(LogTemp, Error, TEXT("Player instance not found in UAbilityTree"));
     }
 
+    FProgressBarStyle Style = UnlockingProgressBar->GetWidgetStyle();
+
     if (bUnlocked)
     {
-        Icon->SetBrushTintColor(FLinearColor(0, 1, 0, 0.25));
+        Style.FillImage.TintColor = FLinearColor(0, 1, 0, 0.25);
         UnlockingProgressBar->SetPercent(1);
         bPrevAbilityUnlocked = true;
     }
     else
 	{
-		Icon->SetBrushTintColor(FLinearColor(0.33, 0.33, 0.33, 0.25));
+        Style.FillImage.TintColor = FLinearColor(0.33, 0.33, 0.33, 0.25);
 		UnlockingProgressBar->SetPercent(0);
 	}
+
+    UnlockingProgressBar->SetWidgetStyle(Style);
 
     Button->OnClicked.AddDynamic(this, &UTreeNode::MouseDown);
     Button->OnReleased.AddDynamic(this, &UTreeNode::MouseUp);
@@ -56,7 +57,9 @@ void UTreeNode::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
             if (fLastClickTime >= fNecessaryClickTime)
 			{
                 bUnlocked = true;
-                Icon->SetBrushTintColor(FLinearColor(0, 1, 0, 0.25));
+                FProgressBarStyle Style = UnlockingProgressBar->GetWidgetStyle();
+                Style.FillImage.TintColor = FLinearColor(0, 1, 0, 0.25);
+                UnlockingProgressBar->SetWidgetStyle(Style);
                 UnlockingProgressBar->SetPercent(1);
 
                 Player->RemovePoints(UnlockCost);

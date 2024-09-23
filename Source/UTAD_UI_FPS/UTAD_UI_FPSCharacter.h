@@ -18,6 +18,7 @@ struct FInputActionValue;
 class UPlayerHUD;
 class USplashScreen;
 class UPlayerDamageOverlay;
+class UAbilityTree;
 
 DECLARE_DELEGATE_TwoParams(FOnHealthChanged, int /* New Health*/, int /* Max Health*/)
 DECLARE_DELEGATE_OneParam(FOnPointsChanged, int /* New Points */)
@@ -50,6 +51,13 @@ class AUTAD_UI_FPSCharacter : public ACharacter
 	/** Move Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	class UInputAction* MoveAction;
+
+	/* UI */
+
+	bool AbilityTreeOpen = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	class UInputAction* OpenAbilityTreeAction;
 
 	
 public:
@@ -139,6 +147,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UI)
 	TSubclassOf<UPlayerDamageOverlay> PlayerDamageSignWidget;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = UI)
+	TSubclassOf<UAbilityTree> AbilityTreeWidget;
+
 	FOnHealthChanged OnHealthChanged;
 	FOnPointsChanged OnPointsChanged;
 
@@ -148,6 +159,8 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+
+	void OpenAbilityTree(const FInputActionValue& Value);
 
 protected:
 	// APawn interface
@@ -178,5 +191,7 @@ private:
 	USplashScreen* SplashScreenInstance;
 
 	UPlayerDamageOverlay* PlayerDamageOverlayInstance;
+
+	UAbilityTree* AbilityTreeInstance;
 };
 

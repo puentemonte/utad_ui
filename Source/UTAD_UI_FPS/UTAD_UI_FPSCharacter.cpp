@@ -15,6 +15,7 @@
 #include "UI/Crosshair.h"
 #include "UI/SplashScreen.h"
 #include "UI/PlayerDamageSign.h"
+#include "UI/AbilityTree.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AUTAD_UI_FPSCharacter
@@ -93,6 +94,16 @@ void AUTAD_UI_FPSCharacter::BeginPlay()
 		UE_LOG(LogTemp, Error, TEXT("Player Damage Sign Widget not assigned to UTAD_UI_FPSCharacter"));
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Player Damage Sign Widget not assigned to UTAD_UI_FPSCharacter"));
 	}
+
+	if (AbilityTreeWidget)
+	{
+		AbilityTreeInstance = CreateWidget<UAbilityTree>(GetWorld(), AbilityTreeWidget);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Ability Tree Widget not assigned to UTAD_UI_FPSCharacter"));
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Ability Tree Widget not assigned to UTAD_UI_FPSCharacter"));
+	}
 }
 
 void AUTAD_UI_FPSCharacter::Tick(float DeltaTime)
@@ -140,6 +151,9 @@ void AUTAD_UI_FPSCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 
 		//Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AUTAD_UI_FPSCharacter::Look);
+
+		// UI
+		EnhancedInputComponent->BindAction(OpenAbilityTreeAction, ETriggerEvent::Started, this, &AUTAD_UI_FPSCharacter::OpenAbilityTree);
 	}
 }
 
@@ -168,6 +182,19 @@ void AUTAD_UI_FPSCharacter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void AUTAD_UI_FPSCharacter::OpenAbilityTree(const FInputActionValue& Value)
+{
+	if (AbilityTreeOpen)
+	{
+		AbilityTreeInstance->RemoveFromViewport();
+	}
+	else
+	{
+		AbilityTreeInstance->AddToViewport();
+	}
+	AbilityTreeOpen = !AbilityTreeOpen;
 }
 
 void AUTAD_UI_FPSCharacter::SetHealth(int NewHealth)

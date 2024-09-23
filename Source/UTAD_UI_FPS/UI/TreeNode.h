@@ -5,6 +5,9 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 
+#include "Components/ProgressBar.h"
+#include "Components/Button.h"
+
 #include "TreeNode.generated.h"
 
 UENUM(BlueprintType)
@@ -57,14 +60,14 @@ public:
 	UPROPERTY(EditAnywhere, Category = UI)
 	int AbilityLevel = 0;
 
-	UPROPERTY(EditAnywhere, Category = UI, meta = (BindWidget))
-	class UImage* Icon;
-
-	UPROPERTY(EditAnywhere, Category = UI, meta = (BindWidget))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UI, meta = (BindWidget))
 	class UProgressBar* UnlockingProgressBar;
 
-	UPROPERTY(EditAnywhere, Category = UI, meta = (BindWidget))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UI, meta = (BindWidget))
 	class UButton* Button;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UI, meta = (BindWidget))
+	class UTextBlock* Text;
 
 
 	void MouseDown();
